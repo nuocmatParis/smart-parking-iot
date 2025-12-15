@@ -21,7 +21,7 @@ Hệ thống quản lý bãi đỗ xe thông minh sử dụng Arduino, ESP8266 v
     * **Giao tiếp:** Serial (Arduino <-> ESP), WebSocket (ESP <-> Web).
 
 ## 👥 Thành viên nhóm
-* **[Hoàng Thị Khánh Linh]** - Leader
-* **[Võ Đức Trí]**
-* **[Nguyễn Đoàn Nhật Đăng]**
-* **[Trần Phú Hưng]**
+* **Hoàng Thị Khánh Linh** - Leader
+* **Võ Đức Trí**
+* **Nguyễn Đoàn Nhật Đăng]**
+* **Trần Phú Hưng**
