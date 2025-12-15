@@ -25,4 +25,6 @@ Hệ thống quản lý bãi đỗ xe thông minh sử dụng Arduino, ESP8266 v
 * **Võ Đức Trí**
 * **Nguyễn Đoàn Nhật Đăng**
 * **Trần Phú Hưng**
-Made with ❤️ by Team 2 - FPT University
+
+---
+> **Made with ❤️ by Team 2 - FPT University**
