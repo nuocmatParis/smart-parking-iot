@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Parking System</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="icon" type="image/png" href="assets/car.png">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="assets/logo.png" class="fptu-logo" alt="FPT University">
+    <div class="car-wrap">
+      
+      <img src="assets/car.png" class="brand-car" alt="car" />
+      <div class="signal" aria-hidden="true">
+        <span class="wave w1"></span>
+        <span class="wave w2"></span>
+        <span class="wave w3"></span>
+      </div>
+    </div>
+
+    <span class="brand-text">Smart Parking System<span id="status-dot"></span></span>
+  </div>
+
+  <div class="actions">
+    
+    <button class="icon-btn" title="Notifications">
+        <img src="assets/bell.png" alt="bell" /> 
+        </button>
+
+    <button class="icon-btn" id="darkModeBtn" title="Chế độ tối">
+        🌙
+    </button>
+
+    <button class="icon-btn" onclick="toggleCredits()" title="Thông tin nhóm">
+        ℹ️
+    </button>
+
+    <button class="primary-btn">Export Data</button>
+</div>
+</header>
+
+<div class="layout">
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar">
+    <div class="occupied-card">
+    <div class="progress-container">
+        <svg class="progress-ring" width="120" height="120">
+            <circle class="progress-ring__background" stroke="#eee" stroke-width="8" fill="transparent" r="52" cx="60" cy="60"/>
+            <circle class="progress-ring__circle" stroke="#2ecc71" stroke-width="8" fill="transparent" r="52" cx="60" cy="60"/>
+        </svg>
+        
+        <div class="progress-text">
+            <div class="occupied-number">
+                <span id="occupied" class="occ">0</span>
+                <span class="slash">/</span>
+                <span id="total" class="tot">18</span>
+            </div>
+            <div class="occupied-label">Occupied</div>
+        </div>
+    </div>
+</div>
+  </aside>
+
+  <!-- RIGHT CONTENT -->
+ <main class="content">
+    <div class="panel-title">Parking Occupancy</div>
+
+    <div class="lot-card">
+        <div class="lot-inner">
+            <div class="dashed-area-2">
+                <div class="map-area">
+                    <img src="assets/road.png" class="road-img" alt="road" />
+
+                    <div class="entry-onmap">
+                        <img src="assets/entry.png" alt="Entry" />
+                        <span>Entry</span>
+                    </div>
+                    <div class="exit-onmap">
+                        <span>Exit</span>
+                        <img src="assets/exit.png" alt="Exit" />
+                    </div>
+
+                    <div class="slots-grid-2">
+                        <div class="row-2">
+                            <div class="slot-u odd" id="slot17"><span class="slot-num">17</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer17"></div></div>
+                            <div class="slot-u odd" id="slot15"><span class="slot-num">15</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer15"></div></div>
+                            <div class="slot-u odd" id="slot13"><span class="slot-num">13</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer13"></div></div>
+                            <div class="slot-u odd" id="slot11"><span class="slot-num">11</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer11"></div></div>
+                            <div class="slot-u odd" id="slot9"><span class="slot-num">9</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer9"></div></div>
+                            <div class="slot-u odd" id="slot7"><span class="slot-num">7</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer7"></div></div>
+                            <div class="slot-u odd" id="slot5"><span class="slot-num">5</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer5"></div></div>
+                            <div class="slot-u odd" id="slot3"><span class="slot-num">3</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer3"></div></div>
+                            <div class="slot-u odd" id="slot1"><span class="slot-num">1</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer1"></div></div>
+                        </div>
+
+                        <div class="row-2">
+                            <div class="slot-u even" id="slot18"><span class="slot-num">18</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer18"></div></div>
+                            <div class="slot-u even" id="slot16"><span class="slot-num">16</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer16"></div></div>
+                            <div class="slot-u even" id="slot14"><span class="slot-num">14</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer14"></div></div>
+                            <div class="slot-u even" id="slot12"><span class="slot-num">12</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer12"></div></div>
+                            <div class="slot-u even" id="slot10"><span class="slot-num">10</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer10"></div></div>
+                            <div class="slot-u even" id="slot8"><span class="slot-num">8</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer8"></div></div>
+                            <div class="slot-u even" id="slot6"><span class="slot-num">6</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer6"></div></div>
+                            <div class="slot-u even" id="slot4"><span class="slot-num">4</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer4"></div></div>
+                            <div class="slot-u even" id="slot2"><span class="slot-num">2</span><img class="slot-car" src="assets/slot-car.png" alt=""><div class="slot-timer" id="timer2"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="booth-box">
+                        <div class="booth-text">Security Booth</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="log-container">
+        <div class="panel-title">Nhật ký ra vào (Entry/Exit Log)</div>
+        <input type="text" id="filterInput" placeholder="🔍 Tìm kiếm (VD: Slot 1, Xe vào...)" 
+           style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none;">
+        <div class="table-wrapper">
+            <table class="log-table">
+                <thead>
+                    <tr>
+                        <th style="width: 30%">Thời gian</th>
+                        <th style="width: 20%">Vị trí</th>
+                        <th style="width: 50%">Sự kiện</th>
+                    </tr>
+                </thead>
+                <tbody id="log-body">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <div class="panel-title">Thống kê Lượng xe vào theo giờ</div>
+        <div class="chart-wrapper">
+            <canvas id="parkingChart"></canvas>
+        </div>
+    </div>
+
+</main>
+</div>
+<div id="toast-box"></div>
+<div id="credits-modal" class="modal-overlay" onclick="toggleCredits()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <h2 style="color: #6c5ce7; margin-bottom: 5px;">Smart Parking System</h2>
+        <p style="font-size: 14px; color: #777; margin-top:0">Đồ án IoT - FPT University</p>
+        
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+        
+        <div class="info-row highlight">
+            <strong>👨‍🏫 GVHD:</strong>
+            <span>Thầy Nguyễn Đức Lợi</span>
+        </div>
+
+        <div style="text-align: left; margin-top: 15px;">
+            <strong style="display:block; margin-bottom: 8px; color:#555">👥 Thành viên nhóm:</strong>
+            
+            <ul class="student-list">
+                <li>
+                    <span>1. Hoàng Thị Khánh Linh</span>
+                    <span class="badge">SE190721</span>
+                </li>
+                <li>
+                    <span>2. Võ Đức Trí</span>
+                    <span class="badge">SE204214</span>
+                </li>
+                <li>
+                    <span>3. Nguyễn Đoàn Nhật Đăng</span>
+                    <span class="badge">SE203730</span>
+                </li>
+                <li>
+                    <span>4. Trần Phú Hưng</span>
+                    <span class="badge">SE190886</span>
+                </li>
+            </ul>
+        </div>
+
+        <button class="close-btn" onclick="toggleCredits()">Đóng</button>
+    </div>
+</div>
+</body>
+</html>

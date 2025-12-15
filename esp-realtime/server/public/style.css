@@ -1,0 +1,517 @@
+/* =========================================
+   1. GLOBAL STYLES & RESET
+   ========================================= */
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: #fff;
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển Dark Mode mượt */
+}
+
+/* =========================================
+   2. HEADER (TOPBAR)
+   ========================================= */
+.topbar {
+    height: 96px;
+    background: #fff;
+    border-bottom: 3px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 26px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.fptu-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    border-right: 3px solid #000;
+    padding-right: 20px;
+}
+
+@media (max-width: 768px) {
+    .brand-text { display: none; }
+    .fptu-logo { height: 40px; border-right: none; }
+}
+
+.car-wrap {
+    position: relative;
+    width: 88px;
+    height: 88px;
+}
+
+.brand-car {
+    width: 88px;
+    height: 88px;
+    object-fit: contain;
+}
+
+/* Hiệu ứng sóng wifi trên xe logo */
+.signal {
+    position: absolute;
+    top: 10px; right: -18px;
+    width: 56px; height: 56px;
+}
+.wave {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 4px solid #000;
+    border-color: #000 transparent transparent transparent;
+    border-radius: 50%;
+    transform: rotate(45deg);
+}
+.w1 { transform: rotate(45deg) scale(1); }
+.w2 { transform: rotate(45deg) scale(0.75); }
+.w3 { transform: rotate(45deg) scale(0.52); }
+
+.brand-text {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+    color: #111;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon-btn {
+    width: 52px; height: 44px;
+    border-radius: 12px;
+    border: 2px solid #6c5ce7;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.icon-btn img {
+    width: 18px; height: 18px;
+    object-fit: contain;
+}
+
+.primary-btn {
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 12px;
+    border: 0;
+    background: #6c5ce7;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* =========================================
+   3. LAYOUT & SIDEBAR
+   ========================================= */
+.layout {
+    display: flex;
+    gap: 18px;
+    padding: 18px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sidebar {
+    width: 160px;
+    min-width: 90px;
+    min-height: 560px;
+    background: #f7f8ff;
+    border: 3px solid black;
+    border-radius: 26px;
+    padding: 16px 10px;
+    position: relative;
+    overflow: hidden;
+}
+.sidebar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(120,120,200,.08) 0 40px, transparent 41px),
+        radial-gradient(circle at 70% 50%, rgba(120,120,200,.06) 0 50px, transparent 51px),
+        radial-gradient(circle at 30% 80%, rgba(120,120,200,.06) 0 60px, transparent 61px);
+    pointer-events: none;
+}
+
+/* Vòng tròn tiến độ (Circular Progress) */
+.occupied-card {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding-top: 10px;
+}
+.progress-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.progress-ring__circle {
+    transition: stroke-dashoffset 0.5s ease-in-out, stroke 0.3s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    stroke-linecap: round;
+}
+.progress-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.occupied-number {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 0;
+    font-size: 18px;
+}
+.occ { font-size: 24px; font-weight: 900; color: #e74c3c; }
+.slash { font-size: 18px; font-weight: 800; color: #333; }
+.tot { font-size: 16px; font-weight: 900; color: #1f1f1f; }
+
+.occupied-label {
+    font-size: 10px; font-weight: 700; color: #777;
+    text-transform: uppercase; margin-top: 2px;
+}
+
+/* =========================================
+   4. MAIN CONTENT & MAP AREA
+   ========================================= */
+.content {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #e6e6f2;
+    border-radius: 14px;
+    min-height: 560px;
+    padding: 16px;
+}
+
+.panel-title {
+    font-size: 16px; font-weight: 700; color: #777; margin: 10px 0;
+}
+
+.lot-card {
+    background: #fff;
+    border: 1px solid #e6e6f2;
+    border-radius: 14px;
+    padding: 16px;
+}
+
+.lot-inner {
+    border: 3px solid black;
+    border-radius: 14px;
+    padding: 18px;
+    margin: 0 auto;
+}
+
+.dashed-area-2 { padding: 8px; }
+
+.map-area {
+    position: relative;
+    width: 100%;
+    height: 460px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.road-img {
+    position: absolute; inset: 0;
+    width: 75%; height: 100%;
+    object-fit: contain; object-position: center;
+    pointer-events: none; z-index: 0;
+    image-rendering: auto; transform: translateZ(0);
+}
+
+.entry-onmap, .exit-onmap {
+    position: absolute; z-index: 2;
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; color: #111;
+}
+.entry-onmap { right: 0%; top: 56px; }
+.exit-onmap { right: 15px; bottom: 56px; }
+.entry-onmap img, .exit-onmap img { height: 15px; object-fit: contain; }
+
+/* Grid Slots */
+.slots-grid-2 {
+    position: absolute;
+    left: 35px; top: 120px;
+    z-index: 1;
+    display: grid; grid-template-rows: auto auto; gap: 26px;
+    transform: scale(0.9); transform-origin: top left;
+}
+
+.row-2 {
+    display: grid; grid-template-columns: repeat(9, 58px); gap: 18px;
+}
+
+.slot-u {
+    width: 58px; height: 108px;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1;
+}
+.slot-u.odd::before {
+    content: ""; position: absolute; inset: 0;
+    border-left: 2px solid #222; border-right: 2px solid #222; border-bottom: 2px solid #222;
+}
+.slot-u.even::before {
+    content: ""; position: absolute; inset: 0;
+    border-left: 2px solid #222; border-right: 2px solid #222; border-top: 2px solid #222;
+}
+
+.slot-num {
+    font-size: 26px; font-weight: 900; color: #5b5b66;
+    transition: opacity 0.3s;
+}
+.slot-u.odd .slot-num { transform: translateY(6px); }
+.slot-u.even .slot-num { transform: translateY(-6px); }
+
+/* --- Slot Car Animation --- */
+.slot-car {
+    width: 36px; height: 90px;
+    object-fit: contain;
+    position: absolute;
+    opacity: 0;
+    transform: scale(0.5) translateY(30px);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    pointer-events: none;
+    z-index: 5;
+}
+.slot-u.occupied .slot-car {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+.slot-u.occupied .slot-num { opacity: 0; }
+
+/* Slot Timer */
+.slot-timer {
+    display: none;
+    position: absolute;
+    font-size: 10px; font-weight: bold; color: #fff;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2px 5px; border-radius: 4px;
+    white-space: nowrap; z-index: 10;
+    left: 50%; transform: translateX(-50%);
+}
+.slot-u.odd .slot-timer { bottom: 5px; }
+.slot-u.even .slot-timer { top: 5px; }
+.slot-u.occupied .slot-timer { display: block; }
+
+/* Hiệu ứng nhấp nháy (Scanning) */
+@keyframes blinkYellow {
+    0% { background-color: rgba(241, 196, 15, 0.2); border-color: #f1c40f; }
+    50% { background-color: rgba(241, 196, 15, 0.6); border-color: #fff; }
+    100% { background-color: rgba(241, 196, 15, 0.2); border-color: #f1c40f; }
+}
+.slot-u.validating {
+    animation: blinkYellow 0.4s infinite;
+    border: 2px solid #f1c40f !important;
+}
+.slot-u.validating::after {
+    content: "Scanning...";
+    position: absolute; bottom: -20px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px; font-weight: bold; color: #f1c40f;
+    white-space: nowrap;
+}
+
+/* Security Booth */
+.booth-box {
+    position: absolute; right: -7px; top: 150px; z-index: 1;
+    width: 212px; height: 172px;
+    border-radius: 16px; background: #e9edff;
+    display: flex; align-items: center; justify-content: center;
+}
+.booth-text { font-size: 20px; font-weight: 900; color: #111; }
+
+/* =========================================
+   5. LOG TABLE & CHART
+   ========================================= */
+.log-container, .chart-container {
+    margin-top: 20px;
+    background: #fff;
+    border: 3px solid black;
+    border-radius: 14px;
+    padding: 16px;
+}
+.chart-container { margin-bottom: 50px; }
+
+.table-wrapper {
+    max-height: 200px; overflow-y: auto;
+    border: 1px solid #eee; border-radius: 8px;
+}
+.log-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.log-table th {
+    text-align: left; padding: 10px 15px;
+    background-color: #f7f8ff; color: #555;
+    position: sticky; top: 0; z-index: 2;
+    border-bottom: 2px solid #eee;
+}
+.log-table td {
+    padding: 10px 15px; border-bottom: 1px solid #f0f0f0; color: #333;
+}
+
+.status-in { color: #27ae60; font-weight: bold; display: inline-flex; align-items: center; gap: 5px; }
+.status-out { color: #c0392b; font-weight: bold; display: inline-flex; align-items: center; gap: 5px; }
+
+#status-dot {
+    width: 15px; height: 15px; transform: translateY(6px);
+    border-radius: 50%; background: #ccc;
+    display: inline-block; margin-left: 10px; box-shadow: 0 0 5px #ccc;
+}
+.status-online { background: #2ecc71 !important; box-shadow: 0 0 8px #2ecc71 !important; }
+.status-offline { background: #e74c3c !important; box-shadow: 0 0 8px #e74c3c !important; }
+
+.chart-wrapper { position: relative; height: 300px; width: 100%; }
+
+/* =========================================
+   6. TOAST NOTIFICATIONS
+   ========================================= */
+#toast-box {
+    position: fixed; top: 20px; right: 20px; z-index: 9999;
+    display: flex; flex-direction: column; gap: 10px;
+}
+.toast {
+    background: #fff; min-width: 260px; padding: 12px 18px;
+    border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    border-left: 5px solid #2ecc71;
+    display: flex; align-items: center; gap: 12px;
+    animation: slideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), fadeOut 0.5s ease 3s forwards;
+}
+.toast.out { border-left-color: #e74c3c; }
+.toast-content strong { display: block; font-size: 14px; color: #333; }
+.toast-content span { font-size: 12px; color: #777; }
+
+@keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes fadeOut { to { opacity: 0; transform: translateY(-20px); } }
+
+/* =========================================
+   7. DARK MODE STYLES
+   ========================================= */
+body.dark-mode { background-color: #0f0f1a; color: #e0e0e0; }
+
+.dark-mode .topbar, .dark-mode .sidebar, .dark-mode .content,
+.dark-mode .lot-card, .dark-mode .occupied-card,
+.dark-mode .log-container, .dark-mode .chart-container {
+    background-color: #1a1a2e; border-color: #2e2e4a; color: #fff;
+}
+
+.dark-mode .brand-text, .dark-mode .panel-title,
+.dark-mode .occupied-label { color: #a0a0ff; }
+.dark-mode .occupied-number .tot { color: #666; }
+
+.dark-mode .log-table th { background-color: #23233a; color: #a0a0ff; border-bottom: 1px solid #444; }
+.dark-mode .log-table td { border-bottom: 1px solid #2e2e4a; color: #ccc; }
+.dark-mode input { background-color: #121220; border: 1px solid #444; color: #fff; }
+
+/* =========================================
+   8. CREDITS MODAL (BẢNG THÔNG TIN)
+   ========================================= */
+/* Nút tròn ℹ️ */
+.credits-btn {
+    position: fixed; bottom: 20px; left: 20px;
+    width: 50px; height: 50px;
+    background: #fff; border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: flex; justify-content: center; align-items: center;
+    font-size: 24px; cursor: pointer;
+    transition: transform 0.2s; z-index: 1000;
+}
+.credits-btn:hover { transform: scale(1.1); }
+
+/* Màn hình mờ che phủ (Overlay) */
+.modal-overlay {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none; /* JS sẽ bật cái này thành flex */
+    justify-content: center; /* Căn giữa ngang */
+    align-items: center;     /* Căn giữa dọc */
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+/* Hộp nội dung chính */
+.modal-content {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    width: 380px;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: popup 0.3s ease-out;
+    position: relative;
+}
+
+/* Danh sách sinh viên */
+.student-list {
+    list-style: none; padding: 0; margin: 15px 0 0 0;
+    border: 1px solid #eee; border-radius: 8px;
+    overflow: hidden; text-align: left;
+}
+.student-list li {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 15px; border-bottom: 1px solid #eee;
+    font-size: 14px; color: #333;
+}
+.student-list li:nth-child(even) { background-color: #f9f9f9; }
+.student-list li:last-child { border-bottom: none; }
+
+/* Badge MSSV */
+.badge {
+    background: #6c5ce7; color: white;
+    padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: bold;
+}
+
+/* Highlight GVHD */
+.info-row.highlight {
+    background: #fff0f0; padding: 10px;
+    border-radius: 8px; border: 1px solid #ffcccc;
+    color: #d63031;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 15px;
+}
+
+/* Nút đóng */
+.close-btn {
+    background: #6c5ce7; color: white; border: none;
+    padding: 10px 30px; border-radius: 20px;
+    margin-top: 20px; cursor: pointer; font-weight: bold;
+}
+.close-btn:hover { background: #5649c0; }
+
+@keyframes popup {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Fix Dark Mode cho Modal */
+body.dark-mode .credits-btn,
+body.dark-mode .modal-content { background: #1a1a2e; color: #fff; }
+body.dark-mode .student-list { border-color: #444; }
+body.dark-mode .student-list li { border-bottom-color: #444; color: #ccc; background-color: #1a1a2e; }
+body.dark-mode .student-list li:nth-child(even) { background-color: #23233a; }
+body.dark-mode .info-row.highlight { background: #2c1a1a; border-color: #4a2c2c; }
