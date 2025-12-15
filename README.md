@@ -20,31 +20,8 @@ Hệ thống quản lý bãi đỗ xe thông minh sử dụng Arduino, ESP8266 v
     * **Frontend:** HTML, CSS, JavaScript.
     * **Giao tiếp:** Serial (Arduino <-> ESP), WebSocket (ESP <-> Web).
 
-## 🚀 Hướng dẫn cài đặt
-
-### 1. Phần mềm (Web Dashboard)
-Yêu cầu: Máy tính đã cài [Node.js](https://nodejs.org/).
-
-
-# 1. Clone dự án về máy
-git clone [https://github.com/nuocmatParis/smart-parking-iot.git](https://github.com/nuocmatParis/smart-parking-iot.git)
-
-# 2. Di chuyển vào thư mục server
-cd esp-realtime/server
-
-# 3. Cài đặt các thư viện cần thiết
-npm install
-
-# 4. Chạy Server
-node server.js
-
-👥 Thành viên nhóm
-[Hoàng Thị Khánh Linh] - Leader
-
-[Võ Đức Trí] 
-
-[Nguyễn Đoàn Nhật Đăng] 
-
-[Trần Phú Hưng] 
-
-Made with by Team 2 - FPT University
+## 👥 Thành viên nhóm
+* **[Hoàng Thị Khánh Linh]** - Leader
+* **[Võ Đức Trí]**
+* **[Nguyễn Đoàn Nhật Đăng]**
+* **[Trần Phú Hưng]**
